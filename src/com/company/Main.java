@@ -2,9 +2,7 @@ package com.company;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -25,10 +23,12 @@ public class Main extends Application {
     Label moretext;
     FileInputStream input;
     Image image;
-    ImageView imageView;
+    ImageView imageView1;
     VBox Layout;
     Scene myscene;
     ToggleButton toggleButton1;
+    RadioButton radioButton1;
+    RadioButton radioButton2;
     public static void main(String[] args) {
 	// write your code here
         Application.launch(args);
@@ -44,13 +44,30 @@ public class Main extends Application {
         moretext = new Label("How are you today");
          input = new FileInputStream("/Users/fudaylhopkins/Downloads/crying Jordan.jpg");
         image = new Image(input);
-        imageView = new ImageView(image);
-        imageArrayList.add(imageView);
-        imageView.setFitWidth(60);
-        imageView.setFitHeight(60);
+        imageView1 = new ImageView(image);
+        imageArrayList.add(imageView1);
+        imageView1.setFitWidth(60);
+        imageView1.setFitHeight(60);
         toggleButton1 = new ToggleButton("toggle");
+        radioButton1 = new RadioButton("Left");
+        radioButton2 = new RadioButton("Right");
 
-       
+         ToggleGroup radioGroup = new ToggleGroup();
+
+         radioButton1.setToggleGroup(radioGroup);
+         radioButton2.setToggleGroup(radioGroup);
+
+         radioButton1.setOnAction(actionEvent -> {
+             boolean iselected = radioButton1.isSelected();
+             if (iselected) {
+                  imageView1.setImage(image);
+             }
+
+
+
+
+          } );
+
         toggleButton1.setOnAction(actionEvent -> {
            boolean isSelected = toggleButton1.isSelected();
           for(ImageView imageView: imageArrayList) {
@@ -59,7 +76,7 @@ public class Main extends Application {
 
         });
 
-        Layout = new VBox(mybutton, text, moretext, toggleButton1, imageView);
+        Layout = new VBox(mybutton, text, moretext, toggleButton1, imageView1, radioButton1);
 
         FileChooser fileChooser = new FileChooser();
         Button button = new Button("Select File");
@@ -67,7 +84,7 @@ public class Main extends Application {
             File selectedFile = fileChooser.showOpenDialog(stage);
             try {
                 image= new Image(new FileInputStream(selectedFile)) ;
-             
+                    imageView1.setImage(image);
                ImageView imagine = new ImageView(image);
                     imagine.setFitHeight(60);
                     imagine.setFitWidth(60);
