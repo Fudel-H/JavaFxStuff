@@ -22,8 +22,11 @@ public class Main extends Application {
     Label text;
     Label moretext;
     FileInputStream input;
+    FileInputStream input2;
     Image image;
+    Image image2;
     ImageView imageView1;
+    ImageView imageView2;
     VBox Layout;
     Scene myscene;
     ToggleButton toggleButton1;
@@ -48,6 +51,15 @@ public class Main extends Application {
         imageArrayList.add(imageView1);
         imageView1.setFitWidth(60);
         imageView1.setFitHeight(60);
+
+        input2= new FileInputStream("/Users/fudaylhopkins/Downloads/download.jpeg");
+        image2= new Image(input2);
+        imageView2 = new ImageView(image2);
+        imageArrayList.add(imageView2);
+        imageView2.setFitWidth(60);
+        imageView2.setFitHeight(60);
+
+
         toggleButton1 = new ToggleButton("toggle");
         radioButton1 = new RadioButton("Left");
         radioButton2 = new RadioButton("Right");
@@ -60,8 +72,9 @@ public class Main extends Application {
          radioButton1.setOnAction(actionEvent -> {
              boolean iselected = radioButton1.isSelected();
              if (iselected) {
-                  imageView1.setImage(image);
+             imageView2.setImage(image2);
              }
+
 
 
 
@@ -76,7 +89,7 @@ public class Main extends Application {
 
         });
 
-        Layout = new VBox(mybutton, text, moretext, toggleButton1, imageView1, radioButton1);
+        Layout = new VBox(mybutton, text, moretext, toggleButton1, imageView1, radioButton1, imageView2);
 
         FileChooser fileChooser = new FileChooser();
         Button button = new Button("Select File");
